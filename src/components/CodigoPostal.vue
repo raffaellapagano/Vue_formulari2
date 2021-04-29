@@ -3,7 +3,7 @@
         <div class="form-group">
               <label for="cp">CP</label>
               <span v-if="!cp"> Requerido*</span>
-              <input type="text" id="cp" class="form-control" v-model="cp" @blur="validarCP">
+              <input type="text" id="cp" class="form-control" v-model="cp" @blur="ValidarCP">
               <div class="error">
               <span class="text-danger" v-if="cpControl"> 5 digitos</span>
               </div>
@@ -24,7 +24,7 @@ export default {
       }
     },
     methods: {
-        validarCP: function () {  
+        ValidarCP() {  
             if(this.cp.match(/[^0-9]/g)){
                 this.cpControl = false;
             }else if(this.cp.match(/^[0-9]{5,5}$/gm)){

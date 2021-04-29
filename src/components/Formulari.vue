@@ -1,19 +1,22 @@
 <template>
   <div>
     <div class="row">
-        <div class="col md-6 formulario">
-          <h1>Formulario</h1>
+        <div class="col md-6">
+          <h1 class="text-success">Formulario</h1>
           <form @submit.prevent>
             <Name @check="validName = $event"></Name>
             <Telephone @check="validTel = $event"/>
             <CodigoPostal @check="validCp = $event"/> 
             <Email @check="validEmail = $event"/>
             <Password @check="validPassword = $event"/>
-            <button type="button" class="btn btn-primary btn-lg ml-2" @click="RegisterValidate">Validar</button>
+            <hr>
             <div class="error">
-              <span class="text-danger" v-if="check"> Datos incorrectos</span>
+              <span class="text-danger" v-if="check">Datos incorrectos</span>
             </div>
+            <div class="error">
+            <button type="button" class="btn btn-primary btn-lg ml-2" @click="RegisterValidate">Validar</button>
             <button type="submit" class="btn btn-primary btn-lg ml-2">Enviar</button>
+            </div>
           </form>
         </div>
       </div>
@@ -38,7 +41,7 @@ export default {
   },
   data() {
       return{
-        errores: 0,
+        check: "",
         validName: "",
         validTel: "",
         validCp: "",
@@ -50,11 +53,14 @@ export default {
         RegisterValidate(){
           
             if(this.validName || this.validTel || this.validCp || this.validEmail || this.validPassword || this.validPassword){
-                alert("No");
+                this.check = true;
+                alert("Corregir los datos");
             }else if(this.validName === "" || this.validTel === "" || this.validCp === "" || this.validEmail === "" || this.validPassword === "" || this.validPassword === ""){
+                this.check = true;
                 alert("Llenar todos los campos");
             }else{
-                alert("Ok");
+              this.check = false;
+                alert("Datos correctos");
             }
         }
     }
@@ -79,9 +85,6 @@ a {
   color: #42b983;
 }
 .error{
-    height: 10px;
-}
-.formulario{
-  height: 50%;
+    height: 30px;
 }
 </style>

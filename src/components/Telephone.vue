@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="form-group">
-              <label for="telephone">Telephone</label>
+              <label for="telephone">Telefono</label>
               <span v-if="!telephone"> Requerido*</span>
               <input type="text" id="telephone" class="form-control" v-model="telephone" @blur="validarTel">
               <div class="error">

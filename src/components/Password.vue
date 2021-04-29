@@ -27,8 +27,8 @@ export default {
   },
   data() {
       return{
-        correo: "",
-        correo2: "",
+        contrasena: "",
+        contrasena2: "",
         pass: "",
         pass2: "",
         pass3 : ""

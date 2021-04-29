@@ -3,7 +3,7 @@
         <div class="form-group">
               <label for="nombre">Nombre</label>
               <span v-if="!nombre"> Requerido*</span>
-              <input type="text" id="nombre" class="form-control" v-model="nombre" @blur="validarName">
+              <input type="text" id="nombre" class="form-control" v-model="nombre" @blur="ValidarName">
               <div class="error">
               <span class="text-danger" v-if="notAnumber"> Mínim de 6 i màxim de 13 dígits, res més text</span>
               </div>
@@ -14,9 +14,6 @@
 <script>
 export default {
   name: 'Name',
-  props: {
-    msg: String
-  },
   data() {
       return{
         nombre: "",
@@ -24,7 +21,7 @@ export default {
       }
     },
     methods: {
-        validarName: function(){
+        ValidarName(){
             if (this.nombre.match(/^[A-Za-z]{6,13}$/)) {
                 this.notAnumber = false;
             }else if(this.nombre.match(/[^A-Za-z]/g)) {

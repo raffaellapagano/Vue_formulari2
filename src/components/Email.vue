@@ -2,7 +2,7 @@
         <div class="form-group">
               <label for="email">Email</label>
               <span v-if="!correo"> Requerido*</span>
-              <input type="email" id="email" class="form-control" v-model="correo" @blur="validarEmail">
+              <input type="email" id="email" class="form-control" v-model="correo" @blur="ValidarEmail">
               <div class="error">
               <span class="text-danger" v-if="alto"> Email no valid</span>
               </div>
@@ -13,7 +13,7 @@
 export default {
   name: 'Telephone',
   props: {
-    msg: String
+    dato: String
   },
   data() {
       return{
@@ -22,7 +22,7 @@ export default {
       }
     },
     methods: {
-        validarEmail: function(){
+        ValidarEmail(){
             var texto = this.correo;
             var arroba = texto.indexOf("@");
             var punto = texto.indexOf(".");
