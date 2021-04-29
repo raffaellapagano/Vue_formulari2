@@ -31,7 +31,10 @@ export default {
                 this.isAnumber = false;
             }
         }
-         }
+         },
+    beforeUpdate(){
+        this.$emit(`check`, this.isAnumber);
+    }
 }
 
 
@@ -53,6 +56,6 @@ a {
   color: #42b983;
 }
 .error{
-    height: 30px;
+    height: 10px;
 }
 </style>

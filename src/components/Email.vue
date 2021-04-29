@@ -32,7 +32,10 @@ export default {
                 this.alto = false;
             }
         }
-}
+  },
+    beforeUpdate(){
+        this.$emit(`check`, this.alto);
+    }
 }
 
 
@@ -54,6 +57,6 @@ a {
   color: #42b983;
 }
 .error{
-    height: 30px;
+    height: 10px;
 }
 </style>

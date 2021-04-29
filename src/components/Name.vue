@@ -33,9 +33,11 @@ export default {
                 this.notAnumber = true;
             }
         }
-         }
+         },
+    beforeUpdate(){
+        this.$emit(`check`, this.notAnumber);
+    }
 }
-
 
     </script>
     <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -55,6 +57,6 @@ a {
   color: #42b983;
 }
 .error{
-    height: 30px;
+    height: 10px;
 }
 </style>

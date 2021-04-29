@@ -5,7 +5,7 @@
               <span v-if="!cp"> Requerido*</span>
               <input type="text" id="cp" class="form-control" v-model="cp" @blur="validarCP">
               <div class="error">
-              <span class="text-danger" v-if="cpControl"> Res més números</span>
+              <span class="text-danger" v-if="cpControl"> 5 digitos</span>
               </div>
             </div>
     </div>
@@ -33,7 +33,10 @@ export default {
                 this.cpControl = true;
             }
         }
-         }
+      },
+      beforeUpdate(){
+        this.$emit(`check`, this.cpControl);
+    }
 }
 
 
@@ -55,6 +58,6 @@ a {
   color: #42b983;
 }
 .error{
-    height: 30px;
+    height: 10px;
 }
 </style>

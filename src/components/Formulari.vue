@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="row">
-        <div class="col md-6">
+        <div class="col md-6 formulario">
           <h1>Formulario</h1>
           <form @submit.prevent>
-            <Name></Name>
-            <Telephone />
-            <CodigoPostal /> 
-            <Email />
-            <Password />
-            <button type="button" class="btn btn-primary btn-lg ml-2" @click="registerValidate">Validar</button>
+            <Name @check="validName = $event"></Name>
+            <Telephone @check="validTel = $event"/>
+            <CodigoPostal @check="validCp = $event"/> 
+            <Email @check="validEmail = $event"/>
+            <Password @check="validPassword = $event"/>
+            <button type="button" class="btn btn-primary btn-lg ml-2" @click="RegisterValidate">Validar</button>
             <div class="error">
-              <span class="text-danger" v-if="check"> Mínim de 6 i màxim de 13 dígits que contengui majúscules i minúscules.</span>
+              <span class="text-danger" v-if="check"> Datos incorrectos</span>
             </div>
             <button type="submit" class="btn btn-primary btn-lg ml-2">Enviar</button>
           </form>
@@ -39,17 +39,22 @@ export default {
   data() {
       return{
         errores: 0,
-        check: "",
+        validName: "",
+        validTel: "",
+        validCp: "",
+        validEmail: "",
+        validPassword: ""
       }
     },
     methods: {
-        registerValidate: function(){
-            this.errores = 
-            if(this.errores == 0){
-                this.check = false;
-                alert("Todo ok")
+        RegisterValidate(){
+          
+            if(this.validName || this.validTel || this.validCp || this.validEmail || this.validPassword || this.validPassword){
+                alert("No");
+            }else if(this.validName === "" || this.validTel === "" || this.validCp === "" || this.validEmail === "" || this.validPassword === "" || this.validPassword === ""){
+                alert("Llenar todos los campos");
             }else{
-                this.check = true;
+                alert("Ok");
             }
         }
     }
@@ -74,6 +79,9 @@ a {
   color: #42b983;
 }
 .error{
-    height: 30px;
+    height: 10px;
+}
+.formulario{
+  height: 50%;
 }
 </style>

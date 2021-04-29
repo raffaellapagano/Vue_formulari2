@@ -30,7 +30,8 @@ export default {
         correo: "",
         correo2: "",
         pass: "",
-        pass2: ""
+        pass2: "",
+        pass3 : ""
       }
     },
     methods: {
@@ -42,13 +43,22 @@ export default {
             }
         },
         validarPassword2: function () { 
-            if(this.contrasena == this.contrasena2){
+            if(this.contrasena === this.contrasena2){
                 this.pass2 = false;
+                if (!this.pass) {
+                  this.pass3 = false;
+                }else{
+                  this.pass3 = true;
+                }
             }else{
                 this.pass2 = true;
+                this.pass3 = true;
             }
             }
-        }
+        },
+    beforeUpdate(){
+        this.$emit(`check`, this.pass3);
+    }
 }
 
 
@@ -70,6 +80,6 @@ a {
   color: #42b983;
 }
 .error{
-    height: 30px;
+    height: 10px;
 }
 </style>
