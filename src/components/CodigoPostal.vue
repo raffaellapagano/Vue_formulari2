@@ -14,9 +14,6 @@
 <script>
 export default {
   name: 'CodigoPostal',
-  props: {
-    msg: String
-  },
   data() {
       return{
         cp: "",

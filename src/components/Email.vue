@@ -12,9 +12,6 @@
 <script>
 export default {
   name: 'Telephone',
-  props: {
-    dato: String
-  },
   data() {
       return{
         correo: "",

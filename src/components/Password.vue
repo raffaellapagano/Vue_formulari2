@@ -3,7 +3,7 @@
         <div class="form-group">
               <label for="contrasena">Contraseña</label>
               <span v-if="!contrasena"> Requerido*</span>
-              <input type="password" id="contrasena" class="form-control" v-model="contrasena" @blur="validarPassword">
+              <input type="password" id="contrasena" class="form-control" v-model="contrasena" @blur="ValidarPassword">
               <div class="error">
               <span class="text-danger" v-if="pass"> Mínim de 6 i màxim de 13 dígits que contengui majúscules i minúscules.</span>
               </div>
@@ -11,7 +11,7 @@
             <div class="form-group">
               <label for="contrasena2">Repetir Contraseña</label>
               <span v-if="!contrasena2"> Requerido*</span>
-              <input type="password" id="contrasena2" class="form-control" v-model="contrasena2" @blur="validarPassword2">
+              <input type="password" id="contrasena2" class="form-control" v-model="contrasena2" @blur="ValidarPassword2">
               <div class="error">
               <span class="text-danger" v-if="pass2"> Las contraseñas no coinciden</span>
               </div>
@@ -22,9 +22,6 @@
 <script>
 export default {
   name: 'Password',
-  props: {
-    msg: String
-  },
   data() {
       return{
         contrasena: "",
@@ -35,14 +32,14 @@ export default {
       }
     },
     methods: {
-        validarPassword: function(){
+        ValidarPassword(){
             if(this.contrasena.match(/^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d$@ñ!%*?&+¿_]{6,13}$/)){
                 this.pass = false;
             }else{
                 this.pass = true;
             }
         },
-        validarPassword2: function () { 
+        ValidarPassword2() { 
             if(this.contrasena === this.contrasena2){
                 this.pass2 = false;
                 if (!this.pass) {

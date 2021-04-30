@@ -3,7 +3,7 @@
         <div class="form-group">
               <label for="telephone">Telefono</label>
               <span v-if="!telephone"> Requerido*</span>
-              <input type="text" id="telephone" class="form-control" v-model="telephone" @blur="validarTel">
+              <input type="text" id="telephone" class="form-control" v-model="telephone" @blur="ValidarTel">
               <div class="error">
               <span class="text-danger" v-if="isAnumber"> Res més números</span>
               </div>
@@ -14,9 +14,6 @@
 <script>
 export default {
   name: 'Telephone',
-  props: {
-    msg: String
-  },
   data() {
       return{
         telephone: "",
@@ -24,7 +21,7 @@ export default {
       }
     },
     methods: {
-        validarTel: function(){
+        ValidarTel(){
             if(this.telephone.match(/[^0-9]/g)){
                 this.isAnumber = true;
             }else{
