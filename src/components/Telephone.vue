@@ -22,8 +22,11 @@ export default {
     },
     methods: {
         ValidarTel(){
+          this.isAnumber="";
             if(this.telephone.match(/[^0-9]/g)){
                 this.isAnumber = true;
+            }else if (this.telephone==""){
+                this.isAnumber = "";
             }else{
                 this.isAnumber = false;
             }

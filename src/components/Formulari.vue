@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col md-6">
           <h1 class="text-success">Formulario</h1>
-          <form @submit.prevent>
+          <form @submit.prevent="SendForm">
             <Name @check="validName = $event"></Name>
             <Telephone @check="validTel = $event"/>
             <CodigoPostal @check="validCp = $event"/> 
@@ -55,7 +55,7 @@ export default {
             if(this.validName || this.validTel || this.validCp || this.validEmail || this.validPassword || this.validPassword){
                 this.check = true;
                 alert("Corregir los datos");
-            }else if(this.validName === "" || this.validTel === "" || this.validCp === "" || this.validEmail === "" || this.validPassword === "" || this.validPassword === ""){
+            }else if(this.validName === "" || this.validTel === "" || this.validCp === "" || this.validEmail === ""){
                 this.check = true;
                 alert("Llenar todos los campos");
             }else{

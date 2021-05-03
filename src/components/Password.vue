@@ -33,6 +33,7 @@ export default {
     },
     methods: {
         ValidarPassword(){
+          this.pass= "";
             if(this.contrasena.match(/^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d$@ñ!%*?&+¿_]{6,13}$/)){
                 this.pass = false;
             }else{
@@ -40,12 +41,13 @@ export default {
             }
         },
         ValidarPassword2() { 
+          this.pass2 = "";
+          this.pass3 = "";
             if(this.contrasena === this.contrasena2){
-                this.pass2 = false;
-                if (!this.pass) {
+                if(!this.pass){
                   this.pass3 = false;
                 }else{
-                  this.pass3 = true;
+                  this.pass3 = true
                 }
             }else{
                 this.pass2 = true;

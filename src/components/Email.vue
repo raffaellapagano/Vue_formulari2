@@ -4,7 +4,7 @@
               <span v-if="!correo"> Requerido*</span>
               <input type="email" id="email" class="form-control" v-model="correo" @blur="ValidarEmail">
               <div class="error">
-              <span class="text-danger" v-if="alto"> Email no valid</span>
+              <span class="text-danger" v-if="emailControl"> Email no valid</span>
               </div>
         </div>
 </template>
@@ -15,23 +15,26 @@ export default {
   data() {
       return{
         correo: "",
-        alto: ""
+        emailControl: ""
       }
     },
     methods: {
         ValidarEmail(){
+          this.emailControl = "";
             var texto = this.correo;
             var arroba = texto.indexOf("@");
             var punto = texto.indexOf(".");
-            if (arroba == -1 || punto ==-1){
-                this.alto = true;
+            if(this.correo==""){
+                this.emailControl = "";
+            }else if (arroba == -1 || punto ==-1){
+                this.emailControl = true;
             }else{
-                this.alto = false;
+                this.emailControl = false;
             }
         }
   },
     beforeUpdate(){
-        this.$emit(`check`, this.alto);
+        this.$emit(`check`, this.emailControl);
     }
 }
 

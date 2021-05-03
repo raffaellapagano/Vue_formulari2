@@ -21,11 +21,14 @@ export default {
       }
     },
     methods: {
-        ValidarCP() {  
+        ValidarCP() { 
+          this.cpControl= ""; 
             if(this.cp.match(/[^0-9]/g)){
                 this.cpControl = false;
             }else if(this.cp.match(/^[0-9]{5,5}$/gm)){
                 this.cpControl = false;
+            }else if(this.cp==""){
+                this.cpControl = "";
             }else{
                 this.cpControl = true;
             }

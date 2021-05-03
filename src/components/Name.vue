@@ -22,12 +22,15 @@ export default {
     },
     methods: {
         ValidarName(){
+          this.notAnumber = "";
             if (this.nombre.match(/^[A-Za-z]{6,13}$/)) {
                 this.notAnumber = false;
             }else if(this.nombre.match(/[^A-Za-z]/g)) {
                 this.notAnumber = true;
+            }else if (this.nombre==""){
+                this.notAnumber = "";
             }else{
-                this.notAnumber = true;
+              this.notAnumber = true;
             }
         }
          },
