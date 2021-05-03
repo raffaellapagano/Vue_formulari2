@@ -3,7 +3,12 @@
     <div class="row">
         <div class="col md-6">
           <h1 class="text-success">Formulario</h1>
-          <form @submit.prevent="SendForm">
+          <form @submit.prevent>
+            <InputComponent 
+              nameInput="Nombre"
+              type= "text"
+              id="name"
+              msgInput="Mínim de 6 i màxim de 13 dígits, res més text" />
             <Name @check="validName = $event"></Name>
             <Telephone @check="validTel = $event"/>
             <CodigoPostal @check="validCp = $event"/> 
@@ -24,6 +29,7 @@
 </template>
 
 <script>
+import InputComponent from './InputComponent'
 import Name from './Name.vue'
 import Telephone from './Telephone.vue'
 import CodigoPostal from './CodigoPostal.vue'
@@ -33,6 +39,7 @@ import Password from './Password.vue'
 export default {
   name: 'Formulari',
   components: {
+    InputComponent,
     Name,
     Telephone,
     CodigoPostal,
@@ -41,6 +48,7 @@ export default {
   },
   data() {
       return{
+        Imput: "",
         check: "",
         validName: "",
         validTel: "",
