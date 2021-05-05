@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col md-6">
           <h1 class="text-success">Formulario</h1>
-          <form @submit.prevent="RegisterValidate">
+          <form @submit.prevent>
 
             <InputComponent 
               :label="labelText.labelName"
@@ -11,7 +11,7 @@
               :idInput= "'idName'"
               :msgInput="msnText.msnString"
               :require="true"
-              @ReturnValidation="AddValidation"></InputComponent>
+              @ReturnValidation="AddValidation1"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelTel"
@@ -19,7 +19,7 @@
               :idInput= "'idTel'"
               :msgInput="msnText.msnTel"
               :require="true"
-              @ReturnValidation="AddValidation"></InputComponent>
+              @ReturnValidation="AddValidation2"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelCP"
@@ -27,7 +27,7 @@
               :idInput= "'idCP'"
               :msgInput="msnText.msnCP"
               :require="true"
-              @ReturnValidation="AddValidation"></InputComponent>
+              @ReturnValidation="AddValidation3"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelEmail"
@@ -35,7 +35,7 @@
               :idInput= "'idEmail'"
               :msgInput="msnText.msnEmail"
               :require="true"
-              @ReturnValidation="AddValidation"></InputComponent>
+              @ReturnValidation="AddValidation4"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelPass"
@@ -43,8 +43,7 @@
               :idInput= "'idPass'"
               :msgInput="msnText.msnPass"
               :require="true"
-              @ReturnValidation="AddValidation"
-              @Password="checkPassword"></InputComponent>
+              @ReturnValidation="AddValidation5"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelPass2"
@@ -52,8 +51,8 @@
               :idInput= "'idPass2'"
               :msgInput="msnText.msnPass2"
               :require="true"
-              :checkPassword2="checkPassword"
-              @ReturnValidation="AddValidation"></InputComponent>
+              :checkPassword2="user.password"
+              @ReturnValidation="AddValidation6"></InputComponent>
 
               
             <hr>
@@ -64,8 +63,7 @@
                 </ul>
               </div>
               <div>
-            <button type="button" class="btn btn-primary btn-lg ml-2">Validar</button>
-            <button type="submit" class="btn btn-primary btn-lg ml-2">Enviar</button>
+            <button type="submit" class="btn btn-primary btn-lg ml-2" @click="AlertValue">Enviar</button>
             </div>
           </form>
         </div>
@@ -83,7 +81,6 @@ export default {
   },
   data() {
       return{
-        checkPassword: "",
         errors: [],
         labelText: {
           labelName: "Nombre",
@@ -100,16 +97,49 @@ export default {
           msnEmail: "Formato no correcto",
           msnPass: "De 6 a 13 dígitos que contengan mayúsculas y minúsculas",
           msnPass2: "Las contraseñas no son iguales"
+        },
+        user: {
+        name: "",
+        tel: "",
+        cP: "",
+        email: "",
+        password: "",
+        password2: ""
         }
-
       }
     },
     methods: {
-      AddValidation(value){
-        return value;
+      AddValidation1(value){
+        this.user.name = value;
       },
-      ControlPass(value){
-        return value;
+      AddValidation2(value){
+        this.user.tel = value;
+      },
+      AddValidation3(value){
+        this.user.cP = value;
+      },
+      AddValidation4(value){
+        this.user.email = value;
+      },
+      AddValidation5(value){
+        this.user.password = value;
+      },
+      AddValidation6(value){
+        this.user.password2 = value;
+      },
+      AlertValue(){
+        let text = `
+        Nombre: ${this.user.name}
+        Teléfono: ${this.user.tel}
+        CP: ${this.user.cP}
+        Email: ${this.user.email}
+        Password: ${this.user.password}`
+
+        if(this.user.name && this.user.tel && this.user.cP && this.user.email && this.user.password && this.user.password2){
+        alert(text);
+        }else{
+          alert("Datos incorrectos")
+        }
       }
     }
 }
