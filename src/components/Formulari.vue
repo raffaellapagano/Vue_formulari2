@@ -56,12 +56,6 @@
 
               
             <hr>
-            
-            <div class="error" v-if="errors.length">
-                <ul>
-                  <li v-for="error in errors" :key="error"></li>
-                </ul>
-              </div>
               <div>
             <button type="submit" class="btn btn-primary btn-lg ml-2" @click="AlertValue">Enviar</button>
             </div>
@@ -74,6 +68,7 @@
 <script>
 import InputComponent from './InputComponent.vue'
 
+
 export default {
   name: 'Formulari',
   components: {
@@ -81,7 +76,6 @@ export default {
   },
   data() {
       return{
-        errors: [],
         labelText: {
           labelName: "Nombre",
           labelTel: "Móvil",
@@ -99,13 +93,14 @@ export default {
           msnPass2: "Las contraseñas no son iguales"
         },
         user: {
-        name: "",
-        tel: "",
-        cP: "",
-        email: "",
-        password: "",
-        password2: ""
-        }
+          name: "",
+          tel: "",
+          cP: "",
+          email: "",
+          password: "",
+          password2: ""
+        },
+        userRegistered: ""
       }
     },
     methods: {
@@ -128,6 +123,7 @@ export default {
         this.user.password2 = value;
       },
       AlertValue(){
+        this.userRegistered = "";
         let text = `
         Nombre: ${this.user.name}
         Teléfono: ${this.user.tel}
@@ -136,13 +132,22 @@ export default {
         Password: ${this.user.password}`
 
         if(this.user.name && this.user.tel && this.user.cP && this.user.email && this.user.password && this.user.password2){
-        alert(text);
-        }else{
-          alert("Datos incorrectos")
+            alert(text);
+
+            this.user.name = "";
+            this.user.tel = "";
+            this.user.cP = "";
+            this.user.email = "";
+            this.user.password = "";
+            this.user.password2 = "";
+      }else{
+            alert("Datos incorrectos");
         }
       }
-    }
+      }
+    
 }
+
 
 </script>
 
