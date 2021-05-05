@@ -3,23 +3,68 @@
     <div class="row">
         <div class="col md-6">
           <h1 class="text-success">Formulario</h1>
-          <form @submit.prevent>
+          <form @submit.prevent="RegisterValidate">
+
             <InputComponent 
-              nameInput="Nombre"
-              type= "text"
-              id="name"
-              msgInput="Mínim de 6 i màxim de 13 dígits, res més text" />
-            <Name @check="validName = $event"></Name>
-            <Telephone @check="validTel = $event"/>
-            <CodigoPostal @check="validCp = $event"/> 
-            <Email @check="validEmail = $event"/>
-            <Password @check="validPassword = $event"/>
+              :label="labelText.labelName"
+              :type= "'text'"
+              :idInput= "'idName'"
+              :msgInput="msnText.msnString"
+              :require="true"
+              @ReturnValidation="AddValidation"></InputComponent>
+
+              <InputComponent 
+              :label="labelText.labelTel"
+              :type= "'text'"
+              :idInput= "'idTel'"
+              :msgInput="msnText.msnTel"
+              :require="true"
+              @ReturnValidation="AddValidation"></InputComponent>
+
+              <InputComponent 
+              :label="labelText.labelCP"
+              :type= "'text'"
+              :idInput= "'idCP'"
+              :msgInput="msnText.msnCP"
+              :require="true"
+              @ReturnValidation="AddValidation"></InputComponent>
+
+              <InputComponent 
+              :label="labelText.labelEmail"
+              :type= "'email'"
+              :idInput= "'idEmail'"
+              :msgInput="msnText.msnEmail"
+              :require="true"
+              @ReturnValidation="AddValidation"></InputComponent>
+
+              <InputComponent 
+              :label="labelText.labelPass"
+              :type= "'password'"
+              :idInput= "'idPass'"
+              :msgInput="msnText.msnPass"
+              :require="true"
+              @ReturnValidation="AddValidation"
+              @Password="checkPassword"></InputComponent>
+
+              <InputComponent 
+              :label="labelText.labelPass2"
+              :type= "'password'"
+              :idInput= "'idPass2'"
+              :msgInput="msnText.msnPass2"
+              :require="true"
+              :checkPassword2="checkPassword"
+              @ReturnValidation="AddValidation"></InputComponent>
+
+              
             <hr>
-            <div class="error">
-              <span class="text-danger" v-if="check">Datos incorrectos</span>
-            </div>
-            <div class="error">
-            <button type="button" class="btn btn-primary btn-lg ml-2" @click="RegisterValidate">Validar</button>
+            
+            <div class="error" v-if="errors.length">
+                <ul>
+                  <li v-for="error in errors" :key="error"></li>
+                </ul>
+              </div>
+              <div>
+            <button type="button" class="btn btn-primary btn-lg ml-2">Validar</button>
             <button type="submit" class="btn btn-primary btn-lg ml-2">Enviar</button>
             </div>
           </form>
@@ -29,48 +74,43 @@
 </template>
 
 <script>
-import InputComponent from './InputComponent'
-import Name from './Name.vue'
-import Telephone from './Telephone.vue'
-import CodigoPostal from './CodigoPostal.vue'
-import Email from './Email.vue'
-import Password from './Password.vue'
+import InputComponent from './InputComponent.vue'
 
 export default {
   name: 'Formulari',
   components: {
-    InputComponent,
-    Name,
-    Telephone,
-    CodigoPostal,
-    Email,
-    Password
+    InputComponent
   },
   data() {
       return{
-        Imput: "",
-        check: "",
-        validName: "",
-        validTel: "",
-        validCp: "",
-        validEmail: "",
-        validPassword: ""
+        checkPassword: "",
+        errors: [],
+        labelText: {
+          labelName: "Nombre",
+          labelTel: "Móvil",
+          labelCP: "Código Postal",
+          labelEmail: "Email",
+          labelPass: "Contraseña",
+          labelPass2: "Repertir Contraseña"
+        },
+        msnText: {
+          msnString: "Mínim de 6 i màxim de 13 dígits, res més text",
+          msnTel: "Sólo dígitos",
+          msnCP: "5 dígitos",
+          msnEmail: "Formato no correcto",
+          msnPass: "De 6 a 13 dígitos que contengan mayúsculas y minúsculas",
+          msnPass2: "Las contraseñas no son iguales"
+        }
+
       }
     },
     methods: {
-        RegisterValidate(){
-          
-            if(this.validName || this.validTel || this.validCp || this.validEmail || this.validPassword || this.validPassword){
-                this.check = true;
-                alert("Corregir los datos");
-            }else if(this.validName === "" || this.validTel === "" || this.validCp === "" || this.validEmail === ""){
-                this.check = true;
-                alert("Llenar todos los campos");
-            }else{
-              this.check = false;
-                alert("Datos correctos");
-            }
-        }
+      AddValidation(value){
+        return value;
+      },
+      ControlPass(value){
+        return value;
+      }
     }
 }
 
@@ -94,5 +134,6 @@ a {
 }
 .error{
     height: 30px;
+    color: red;
 }
 </style>

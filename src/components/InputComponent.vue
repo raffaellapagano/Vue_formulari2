@@ -1,11 +1,15 @@
 <template>
     <div>
         <div class="form-group">
-              <label>{{nameInput}}</label>
+              <label>{{label}}</label>
               <span v-if="!valueInput"> Requerido*</span>
-              <input type="type" id="idInput" class="form-control" v-model="valueInput" @blur="ValidarName">
+              <input :type="type" 
+                     :id="idInput" 
+                     class="form-control" 
+                     v-model="valueInput" 
+                     @blur="ValidationInput">
               <div class="error">
-              <span class="text-danger" v-if="errorInput"> {{msgInput}}</span>
+              <span class="text-danger" v-if="!validation"> {{msgInput}}</span>
               </div>
             </div>
     </div>
@@ -13,35 +17,113 @@
 
 <script>
 export default {
-  name: 'Name',
-  props: {
-    nameInput: String,
-    type: String,
-    idInput: String,
-    valueInput: String,
-    errorInput: Boolean,
-    msgInput: String
-  },
+  name: 'InputComponent',
+  props: [
+    "label",
+    "type",
+    "idInput",
+    "msgInput",
+    "require",
+    "errorInput"
+  ],
   data() {
       return{
-        nombre: "",
-        notAnumber: ""
+        valueInput: "",
+        validation: Boolean,
+        message: "",
+        checkPassword2: "",
+        element:{
+          id:this.idInput,
+          value: "",
+          validation: "",
+          msn: this.msgInput
+        }
       }
     },
     methods: {
-        ValidarName(){
-          this.errorInput = "";
-            if (this.valueImput.match(/^[A-Za-z]{6,13}$/)) {
-                this.errorInput = false;
-            }else if(this.valueImput.match(/[^A-Za-z]/g)) {
-                this.errorInput = true;
-            }else if (this.valueImput==""){
-                this.errorInput = "";
+    ValidationInput(){
+      
+      switch (this.label) {
+          case "Nombre": //metodo para validar el Name
+            if (this.valueInput.match(/^[A-Za-z]{6,13}$/)) {
+                this.validation = true;
+                this.element.value = this.valueInput;
+            }else if(this.valueInput.match(/[^A-Za-z]/g)) {
+                this.validation = false;
+            }else if (this.valueInput==""){
+                this.validation = "";
             }else{
-              this.errorInput = true;
+              this.validation = false;
             }
-        }
-         }
+          break;
+
+          case "Móvil": //metodo para validar el Móvil
+            if(this.valueInput.match(/[^0-9]/g)){
+                this.validation = false;
+                this.element.value = this.valueInput;
+            }else if (this.valueInput==""){
+                this.validation = "";
+            }else{
+                this.validation = true;
+            }
+          break;
+
+          case "Código Postal": //metodo para validar el Código Postal
+            if(this.valueInput.match(/[^0-9]/g)){
+                this.validation = true;
+            }else if(this.valueInput.match(/^[0-9]{5,5}$/gm)){
+                this.validation = true;
+            }else if(this.valueInput==""){
+                this.validation = "";
+            }else{
+                this.validation = false;
+            }
+          break;
+
+          case "Email": //metodo para validar el Email
+            var texto = this.valueInput;
+            var arroba = texto.indexOf("@");
+            var punto = texto.indexOf(".");
+            if(texto==""){
+                this.validation = "";
+            }else if (arroba == -1 || punto ==-1){
+                this.validation = false;
+            }else{
+                this.validation = true;
+            }
+            break;
+
+            case "Contraseña": //metodo para validar el Password
+            if(this.valueInput.match(/^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d$@ñ!%*?&+¿_]{6,13}$/)){
+                this.validation = true;
+                this.$emit(`Password`, this.valueInput);
+            }else{
+                this.validation = false;
+            }
+            break;
+
+            case "Repertir Contraseña": //metodo para validar el Password
+            this.validation = "";
+            if(this.checkPassword2 === this.valueInput){
+                this.validation = true;
+            }else{
+                this.validation = false;
+                alert(this.checkPassword2)
+            }
+            break;
+      
+        default:
+          break;
+      }
+    },
+    Add(){
+      this.element.value = this.valueInput;
+      this.$emit(`ReturnValidation`, this.element);
+    },
+    beforeUpdate(){
+        this.$emit(`Password`, this.valueInput);
+    }
+}
 }
 
     </script>
