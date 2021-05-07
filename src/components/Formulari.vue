@@ -86,7 +86,7 @@ export default {
         },
         msnText: {
           msnString: "Mínim de 6 i màxim de 13 dígits, res més text",
-          msnTel: "Sólo dígitos",
+          msnTel: "9 dígitos",
           msnCP: "5 dígitos",
           msnEmail: "Formato no correcto",
           msnPass: "De 6 a 13 dígitos que contengan mayúsculas y minúsculas",

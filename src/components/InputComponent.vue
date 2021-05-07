@@ -62,12 +62,12 @@ export default {
           case "Móvil": //metodo para validar el Móvil
             if(this.valueInput.match(/[^0-9]/g)){
                 this.validation = false;
-            }else if (this.valueInput==""){
-                this.validation = "";
-            }else{
+            }else if(this.valueInput.match(/^[0-9]{9,9}$/gm)){
                 this.validation = true;
                 this.element.value = this.valueInput;
                 this.Add();
+            }else{
+                this.validation = false;
             }
           break;
 
