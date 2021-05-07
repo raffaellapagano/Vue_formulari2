@@ -117,9 +117,10 @@ export default {
                 this.Add();
             }else{
                 this.validation = false;
+                this.Add();
             }
             break;
-      
+                  
         default:
           break;
       }

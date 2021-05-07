@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col md-6">
           <h1 class="text-success">Formulario</h1>
-          <form @submit.prevent>
+          <form id= "myForm" @submit.prevent>
 
             <InputComponent 
               :label="labelText.labelName"
@@ -138,17 +138,11 @@ export default {
         Email: ${this.user.email}
         Password: ${this.user.password}`
 
-        if(this.user.name && this.user.tel && this.user.cP && this.user.email && this.user.password && this.user.password2){
+        if(this.user.name && this.user.tel && this.user.cP && this.user.email && (this.user.password === this.user.password2)){
             alert(text);
-
-            this.user.name = "";
-            this.user.tel = "";
-            this.user.cP = "";
-            this.user.email = "";
-            this.user.password = "";
-            this.user.password2 = "";
-      }else{
-            alert(text);
+            location.reload();
+        }else{
+            alert("Datos incorrectos");
         }
       }
       }
