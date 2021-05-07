@@ -125,7 +125,7 @@ export default {
       }
     },
     Add(){
-      this.$emit(`ReturnValidation`, this.element.value);
+      this.$emit(`ReturnValidation`, this.element);
      }
     }
 }

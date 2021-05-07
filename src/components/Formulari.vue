@@ -11,7 +11,7 @@
               :idInput= "'idName'"
               :msgInput="msnText.msnString"
               :require="true"
-              @ReturnValidation="AddValidation1"></InputComponent>
+              @ReturnValidation="AddValidation"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelTel"
@@ -19,7 +19,7 @@
               :idInput= "'idTel'"
               :msgInput="msnText.msnTel"
               :require="true"
-              @ReturnValidation="AddValidation2"></InputComponent>
+              @ReturnValidation="AddValidation"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelCP"
@@ -27,7 +27,7 @@
               :idInput= "'idCP'"
               :msgInput="msnText.msnCP"
               :require="true"
-              @ReturnValidation="AddValidation3"></InputComponent>
+              @ReturnValidation="AddValidation"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelEmail"
@@ -35,7 +35,7 @@
               :idInput= "'idEmail'"
               :msgInput="msnText.msnEmail"
               :require="true"
-              @ReturnValidation="AddValidation4"></InputComponent>
+              @ReturnValidation="AddValidation"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelPass"
@@ -43,7 +43,7 @@
               :idInput= "'idPass'"
               :msgInput="msnText.msnPass"
               :require="true"
-              @ReturnValidation="AddValidation5"></InputComponent>
+              @ReturnValidation="AddValidation"></InputComponent>
 
               <InputComponent 
               :label="labelText.labelPass2"
@@ -52,7 +52,7 @@
               :msgInput="msnText.msnPass2"
               :require="true"
               :checkPassword2="user.password"
-              @ReturnValidation="AddValidation6"></InputComponent>
+              @ReturnValidation="AddValidation"></InputComponent>
 
               
             <hr>
@@ -104,23 +104,30 @@ export default {
       }
     },
     methods: {
-      AddValidation1(value){
-        this.user.name = value;
-      },
-      AddValidation2(value){
-        this.user.tel = value;
-      },
-      AddValidation3(value){
-        this.user.cP = value;
-      },
-      AddValidation4(value){
-        this.user.email = value;
-      },
-      AddValidation5(value){
-        this.user.password = value;
-      },
-      AddValidation6(value){
-        this.user.password2 = value;
+      AddValidation(value){
+        switch (value.id) {
+          case 'idName':
+            this.user.name = value.value;
+            break;
+          case 'idTel':
+            this.user.tel = value.value;
+            break;
+          case 'idCP':
+            this.user.cP = value.value;
+            break;
+          case 'idEmail':
+            this.user.email = value.value;
+            break;
+          case 'idPass':
+            this.user.password = value.value;
+            break;
+          case 'idPass2':
+            this.user.password2 = value.value;
+            break;
+        
+          default:
+            break;
+        }
       },
       AlertValue(){
         this.userRegistered = "";
@@ -141,7 +148,7 @@ export default {
             this.user.password = "";
             this.user.password2 = "";
       }else{
-            alert("Datos incorrectos");
+            alert(text);
         }
       }
       }
@@ -153,20 +160,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 .error{
     height: 30px;
     color: red;
